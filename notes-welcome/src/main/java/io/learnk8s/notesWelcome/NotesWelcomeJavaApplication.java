@@ -69,11 +69,11 @@ class Note {
 }
 
 @Configuration
-@EnableConfigurationProperties(KnoteProperties.class)
-class KnoteConfig implements WebMvcConfigurer {
+@EnableConfigurationProperties(NotesWelcomeProperties.class)
+class NotesWelcomeConfig implements WebMvcConfigurer {
 
     @Autowired
-    private KnoteProperties properties;
+    private NotesWelcomeProperties properties;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -88,7 +88,7 @@ class KnoteConfig implements WebMvcConfigurer {
 }
 
 @ConfigurationProperties(prefix = "knote")
-class KnoteProperties {
+class NotesWelcomeProperties {
     @Value("${uploadDir:/tmp/uploads/}")
     private String uploadDir;
 
@@ -98,21 +98,22 @@ class KnoteProperties {
 }
 
 @Controller
-class KNoteController {
+class NotesWelcomeController {
 
     @Autowired
     private NotesRepository notesRepository;
     @Autowired
-    private KnoteProperties properties;
+    private NotesWelcomeProperties properties;
 
     private Parser parser = Parser.builder().build();
     private HtmlRenderer renderer = HtmlRenderer.builder().build();
 
 
-    @GetMapping("/")
-    public String hello() {
-        return "Welcome to a Notes Application";
-    }  
+    @GetMapping("/getNotes")
+    public String index(Model model) {
+        getAllNotes(model);
+        return "index";
+    } 
 
 //    @PostMapping("/note")
 //    public String saveNotes(@RequestParam("image") MultipartFile file,
