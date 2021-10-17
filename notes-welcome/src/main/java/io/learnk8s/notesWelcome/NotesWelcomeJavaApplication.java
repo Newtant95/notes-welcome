@@ -109,9 +109,12 @@ class NotesWelcomeController {
     private HtmlRenderer renderer = HtmlRenderer.builder().build();
 
 
-    @GetMapping("/getNotes")
+    @Value("${msg.title}")
+    private String title;
+     
+    @GetMapping(value = {"/", "/index"})
     public String index(Model model) {
-        getAllNotes(model);
+        model.addAttribute("title", title);
         return "index";
     } 
 
