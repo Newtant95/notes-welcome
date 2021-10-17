@@ -5,5 +5,9 @@
 </head>
 <body class="ph3 pt0 pb4 mw7 center sans-serif">
 <p class="f5 mt1 mb4 lh-copy">A simple note-taking app.</p>
+<h4>${title}</h4>
+<a href="/getNotes">Notes</a>  
+<br/><br/>
+<div>Copyright © Shriya, Subham</div>
 </body>
 </html>
